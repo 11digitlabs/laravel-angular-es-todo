@@ -12,20 +12,20 @@ For the sake of simplicity, http://puphpet.com/ will be used to create the virtu
 - Once the server is up, login with `vagrant ssh`
   - `cd /var/www/todo.local/ `
   - `composer install`
-- Visit `http://todo.local`
 
 # Laravel .env
-
 - Once the server is up, login with `vagrant ssh`
   - `cd /var/www/todo.local/`
   - `cp .env.example .env`
   - Edit the `.env` file and set the database settings (db name/user/pass)
 
 # Passwords
-
 - Mysql `root@todo_db / 123`
 - Mysql `todo_user@todo_db / 123`
 
 # Paths
-
 - Apache `/var/www/todo.local/`
+
+# URLs
+- App http://todo.local
+- Mailcatcher http://192.168.56.111:1080
