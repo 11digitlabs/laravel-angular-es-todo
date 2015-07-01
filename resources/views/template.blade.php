@@ -33,7 +33,7 @@
         </nav>
         <h3 class="text-muted">Todo app - Laravel - Angular - ElasticSearch</h3>
     </div>
-    
+
 
     @yield('content')
 

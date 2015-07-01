@@ -3,12 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use Elasticsearch\Client;
+use Illuminate\Support\Collection;
 use Request;
 
 use App\Http\Requests;
 
 class TasksController extends Controller
 {
+    private $elasticsearch;
+
+    public function __construct( Client $client )
+    {
+        $this->elasticsearch = $client;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -57,5 +66,53 @@ class TasksController extends Controller
     public function destroy( $id )
     {
         Task::destroy( $id );
+    }
+
+    public function search( $name = '' )
+    {
+        $items = $this->searchOnElasticsearch( $name );
+
+        return $this->buildCollection( $items );
+    }
+
+    /**
+     * @param string $query
+     *
+     * @result array
+     */
+    private function searchOnElasticsearch( $query )
+    {
+        $items = $this->elasticsearch->search( [
+            'index' => 'todoapp',
+            'type'  => 'tasks',
+            'body'  => [
+                'query' => [
+                    'match_phrase_prefix' => [
+                        'name' => $query
+                    ]
+                ]
+            ]
+        ] );
+
+        dd( $items );
+
+        return $items;
+    }
+
+    /**
+     * @param array $items the elasticsearch result
+     *
+     * @return Collection of Eloquent models
+     */
+    private function buildCollection( $items )
+    {
+        $result = $items['hits']['hits'];
+
+        return Collection::make( array_map( function ( $r ) {
+            $task = new Task();
+            $task->newInstance( $r['_source'], true );
+            $task->setRawAttributes( $r['_source'], true );
+            return $task;
+        }, $result ) );
     }
 }

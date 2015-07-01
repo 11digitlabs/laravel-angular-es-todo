@@ -13,7 +13,10 @@
 
 Route::get( '/', 'AppController@index' );
 
+
+
 Route::group( [ 'prefix' => 'api/v1' ], function () {
+    Route::get( 'tasks/search/{name?}', 'TasksController@search' );
     Route::resource( 'tasks', 'TasksController' );
 } );
 
