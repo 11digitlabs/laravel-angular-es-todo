@@ -70,9 +70,14 @@ class TasksController extends Controller
 
     public function search( $name = '' )
     {
-        $items = $this->searchOnElasticsearch( $name );
+        if ($name == '') {
+            $tasks = $this->index();
+        } else {
+            $items = $this->searchOnElasticsearch( $name );
+            $tasks = $this->buildCollection( $items );
+        }
 
-        return $this->buildCollection( $items );
+        return $tasks;
     }
 
     /**
@@ -87,14 +92,13 @@ class TasksController extends Controller
             'type'  => 'tasks',
             'body'  => [
                 'query' => [
-                    'match_phrase_prefix' => [
-                        'name' => $query
+                    'query_string' => [
+                        'default_field' => 'name',
+                        'query'         => '*' . $query . '*'
                     ]
                 ]
             ]
         ] );
-
-        dd( $items );
 
         return $items;
     }
