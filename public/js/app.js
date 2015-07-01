@@ -10,6 +10,7 @@ app.controller('todoTasksController', function ($scope, $http) {
     $scope.tasks = []
     $scope.task = ''
     $scope.loading = false
+    $scope.loadingSearch = false
 
     $scope.init = function () {
         $scope.loading = true
@@ -68,6 +69,15 @@ app.controller('todoTasksController', function ($scope, $http) {
                 $scope.loading = false
             })
 
+    }
+
+    $scope.searchTask = function () {
+        $scope.loadingSearch = true
+        $http.get(apiPrefix + 'tasks/search/' + $scope.search.name).
+            success(function (data, status, headers, config) {
+                $scope.tasks = data
+                $scope.loadingSearch = false
+            })
     }
 
     $scope.init()

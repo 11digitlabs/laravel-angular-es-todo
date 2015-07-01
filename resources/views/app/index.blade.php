@@ -14,6 +14,14 @@
                 <button ng-disabled="loading" class="btn btn-primary btn-md" ng-click="storeTask()">Store</button>
                 <i ng-show="loading" class="fa fa-refresh fa-spin"></i>
                 <span ng-show="error">Name cannot be empty</span>
+
+                <h3>Search tasks</h3>
+                <small>Enter is a magic key</small>
+
+                <input ng-disabled="loadingSearch" type="text" ng-model="search.name"
+                       ng-keyup="$event.keyCode == 13 && searchTask()">
+                <button ng-disabled="loadingSearch" class="btn btn-primary btn-md" ng-click="searchTask()">Search</button>
+                <i ng-show="loadingSearch" class="fa fa-refresh fa-spin"></i>
             </div>
 
             <div class="col-md-4">
