@@ -18,13 +18,10 @@ For the sake of simplicity, http://puphpet.com/ will be used to create the virtu
   - `192.168.56.111  todo.local`
 - Once the server is up, login with `vagrant ssh`
   - `cd /var/www/todo.local/ `
-  - `composer install`
-
-# Laravel .env
-- Once the server is up, login with `vagrant ssh`
-  - `cd /var/www/todo.local/`
   - `cp .env.example .env`
   - Edit the `.env` file and set the database settings (db name/user/pass)
+  - `php artisan migrate`
+  - `composer install`
 
 # Passwords
 - Mysql `root@todo_db / 123`
