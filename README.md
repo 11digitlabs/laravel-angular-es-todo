@@ -1,6 +1,9 @@
 # laravel-angular-es-todo
 Simple todo app with laravel, angular and elasticsearch
 
+# Screencast demo
+https://www.dropbox.com/s/5o2sclsjr2mj5ql/screencast.mp4?dl=0
+
 # Server Setup
 For the sake of simplicity, http://puphpet.com/ will be used to create the virtual machine
 
@@ -41,6 +44,12 @@ For the sake of simplicity, http://puphpet.com/ will be used to create the virtu
 - Mailcatcher http://192.168.56.111:1080
 - Adminer http://192.168.56.111/adminer
 - ElasticSearch http://192.168.56.111:9200/
+
+# Further improvements
+- Use bower for frontend dependencies
+- Use elixir to minify/concat css and js
+- Apply the repository pattern
+- Implement caching
 
 # Troubleshooting
 
