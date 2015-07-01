@@ -16,12 +16,18 @@ For the sake of simplicity, http://puphpet.com/ will be used to create the virtu
 - The server will be created with all the necessary services to run the app
 - Edit your local hosts file `sudo pico /etc/hosts` and add the following line
   - `192.168.56.111  todo.local`
-- Once the server is up, login with `vagrant ssh`
+- Once the server is up, connect to the vm by running `vagrant ssh`
   - `cd /var/www/todo.local/ `
   - `cp .env.example .env`
-  - Edit the `.env` file and set the database settings (db name/user/pass)
-  - `php artisan migrate`
+  - Edit the `.env` file (`pico .env`) and set the database settings (db name/user/pass)
+      - `DB_DATABASE=todo_db`
+      - `DB_USERNAME=todo_user`
+      - `DB_PASSWORD=123`
   - `composer install`
+  - `php artisan migrate`
+  - `php artisan key:generate`
+  - Visit http://todo.local and enjoy :)
+
 
 # Passwords
 - Mysql `root@todo_db / 123`
